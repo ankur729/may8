@@ -1,0 +1,119 @@
+<ul class="order-listing">
+	<li class="list" ng-repeat="main_order in view_open_order_user">
+		<div class="order-base">
+			<div class="mini-size">
+				<span class="label"> Order placed </span>
+				<span class="value"> {{main_order.date}} </span>
+			</div>
+			<div class="mini-size">
+				<span class="label">  Total </span>
+				<span class="value"> Rs. {{main_order.items[0].grand_total}}.00 </span>
+			</div>
+		
+			<a href="#0" class="order-number">{{main_order.order_id}}</a>
+		</div>
+
+
+
+		<div ng-repeat="sub_order in main_order.items">
+<!--|| sub_order.sub_order_status=='ready_for_del' || sub_order.sub_order_status=='confirmed'-->
+			<div ng-if="sub_order.sub_order_status=='ready_for_del' || sub_order.sub_order_status=='pending' || sub_order.sub_order_status=='confirmed'">
+		<div class="ordered-product-details" >
+			<span class="pro-thumb"><img src="public/images/product/1.jpg" class="properproduct"></span>
+			<div class="product-details">
+				<a href="#0" class="link">{{sub_order.food_name}}</a>
+				<div class="cuisines">
+					<span class="subtext">Cuisines :</span>
+					<ul class="cuisine-list">
+						<div ng-repeat="cuisine in sub_order.food_cuisine">
+							<div ng-if="cuisine.status=='true'">
+								<li class="list ng-binding">{{cuisine.category_name}}</li>
+
+							</div>
+							
+
+						</div>
+					
+					</ul>
+				</div>
+			</div>
+
+
+			<!-- <a href="" class="add-review-btn right margin-left-10px">Add Review</a> -->
+
+			<div ng-if="sub_order.food_type == 'Vegetarian'">
+					<span class="food-type"><img src="public/images/icon/veg.jpg"></span>
+			</div>
+			<div ng-if="sub_order.food_type == 'Non Vegetarian'">
+						<span class="food-type"><img src="public/images/icon/non-veg.jpg"></span>
+			</div>
+		
+		</div>
+
+		<ul class="order-status">
+			<li class="list">
+				<div class="table-row single">
+				
+						
+													<p class="data" ng-if="sub_order.sub_order_status=='pending'"> 
+														
+														Order has been Placed
+														  
+														  </p>
+
+														  <p class="data" ng-if="sub_order.sub_order_status=='confirmed'"> 
+														
+														Order has been Confirmed
+														  
+														  </p>
+
+														  <p class="data" ng-if="sub_order.sub_order_status=='ready_for_del'"> 
+														
+														Order is Ready For Delivery
+														  
+														  </p>
+
+													
+														  
+				</div>
+			</li>
+			<li class="list">
+				<div class="table-row double"><p class="data">Delivery day : <span class="get">{{sub_order.order_date}}</span></p></div>
+				<div class="table-row double"><p class="data">Delivery Fee :  <span class="get">Rs. 30</span></p></div>
+			</li>
+			<li class="list">
+				<div class="table-row double"><p class="data">Delivery time : <span class="get"> 2 PM</span></p></div>
+				<div class="table-row double"><p class="data">Payment Mode :  <span class="get">Online</span></p></div>
+			</li>
+			<li class="list">
+				<div class="table-row double"><p class="data">Rs. {{sub_order.food_price}} &nbsp; | &nbsp; <span class="get">{{sub_order.food_qty}} qty </span></p></div>
+				<!--<div class="table-row double"><p class="data"><a href="#0" class="cancel-btn">Cancel</a></p></div>-->
+			</li>
+		</ul>
+
+		<div class="total-details">
+			<div class="address">
+				<b class="title">Delivery Address:</b>
+				{{sub_order.addr_info}}
+			</div><br/>
+				<div class="address">
+				<b class="title"> Ship To:</b>
+			{{sub_order.addr_name}}
+			</div>
+				<!--<div class="mini-size">
+				<span class="label">  Ship To </span>
+				<a href="#0" class="trigger">{{main_order.items[0].addr_name}} </a>
+			</div>-->
+			<div class="order-total">
+				<span class="label">Order Total:</span>
+				<span class="amount">Rs.{{sub_order.food_total_price}}</span>
+			</div>
+		</div>
+
+				</div>
+
+		</div>
+
+
+	</li>
+</ul>
